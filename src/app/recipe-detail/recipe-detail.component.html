@@ -1,0 +1,25 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ recipe.name }}</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="recipe.picture" alt="Photo of a Shiba Inu" />
+  <mat-card-content>
+    <p *ngIf="toggleDescription">{{ recipe.description }}</p>
+    <div *ngIf="toggleDescription">
+      <h1>Ingrédients</h1>
+      <ul>
+        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} : {{ ingredient.quantity}} {{ ingredient.unit }}</li>
+      </ul>
+      <h1>Instructions</h1>
+      <ul>
+        <li *ngFor="let instruction of recipe.instructions">{{instruction}}</li>
+      </ul>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">LIKE</button>
+    <button mat-raised-button color="primary" (click)="handleToggleDescription()">Toggle description</button>
+  </mat-card-actions>
+</mat-card>
