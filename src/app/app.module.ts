@@ -4,23 +4,24 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './header/header.component';
 import { CustomMaterialModule } from './custom-material/custom-material.module';
-import { RecipeListComponent } from './recipe-list/recipe-list.component';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './shared/components/header/header.component';
+import { StrToArrayPipe } from './shared/pipes/str-to-array.pipe';
+import { RecipeModule } from './recipe/recipe.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    RecipeListComponent,
-    RecipeDetailComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    CustomMaterialModule
+    CustomMaterialModule,
+    HttpClientModule,
+    RecipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
