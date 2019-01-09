@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, } from '@angular/core';
 import { Recipe } from '../../shared/recipe.model';
+import { RecipeService } from '../../shared/recipe.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -12,7 +13,16 @@ export class RecipeDetailComponent implements OnInit {
   @Input()
   recipe: Recipe;
 
-  constructor() {}
+  @Input()
+  showDescription = false;
+
+  @Input()
+  showSuppression = true;
+
+  @Output()
+  delete: EventEmitter<Recipe> = new EventEmitter();
+
+  constructor(private _recipeService: RecipeService) {}
 
   ngOnInit() {
     console.log(this.recipe);
@@ -20,5 +30,13 @@ export class RecipeDetailComponent implements OnInit {
 
   handleToggleDescription() {
     this.toggleDescription = !this.toggleDescription;
+  }
+
+  deleteRecipe(id: number) {
+    this._recipeService.deleteRecipe(id).subscribe(() => this.delete.emit(this.recipe));
+  }
+
+  suppress() {
+    this.delete.emit(this.recipe);
   }
 }

@@ -1,0 +1,16 @@
+<div class="example-container">
+  <form [formGroup]="recipeForm" (submit)="postChanges()">
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Picture" formControlName="picture" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Description" formControlName="description" />
+    </mat-form-field>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Entrer</button>
+    </mat-card-actions>
+  </form>
+</div>

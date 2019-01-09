@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="example-card" *ngIf="recipe">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ recipe.name }}</mat-card-title>
@@ -10,16 +10,46 @@
     <div *ngIf="toggleDescription">
       <h1>Ingrédients</h1>
       <ul>
-        <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} : {{ ingredient.quantity}} {{ ingredient.unit }}</li>
+        <li *ngFor="let ingredient of recipe.ingredients">
+          {{ ingredient.name }} : {{ ingredient.quantity }}
+          {{ ingredient.unit }}
+        </li>
       </ul>
       <h1>Instructions</h1>
       <ul>
-        <li *ngFor="let instruction of recipe.instructions | strToArray">{{instruction}}</li>
+        <li *ngFor="let instruction of (recipe.instructions | strToArray)">
+          {{ instruction }}
+        </li>
       </ul>
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" routerLink="/recipe/{{ recipe.id }}">Voir détails</button>
-    <button mat-raised-button color="primary" (click)="handleToggleDescription()">Toggle description</button>
+    <button
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/recipes', recipe.id]"
+      *ngIf="!showDescription"
+    >
+      Voir détails
+    </button>
+    <button mat-raised-button color="primary" [routerLink]="['/recipes','update', recipe.id]">
+      Modifier
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="handleToggleDescription()"
+      *ngIf="showDescription"
+    >
+      Toggle description
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="deleteRecipe(recipe.id)"
+      *ngIf="showSuppression"
+    >
+      Supprimer
+    </button>
   </mat-card-actions>
 </mat-card>
